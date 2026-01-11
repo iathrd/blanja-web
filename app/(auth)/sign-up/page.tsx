@@ -1,7 +1,6 @@
 "use client";
 
 import { TabsGroup } from "@/components/shared/tab-group";
-import SigninForm from "@/views/sign-in/sign-in-form";
 import SignupCustomerForm from "@/views/sign-up/form/signup-customer-form";
 import SignupSellerForm from "@/views/sign-up/form/signup-seller-form";
 import Image from "next/image";

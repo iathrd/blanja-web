@@ -1,30 +1,26 @@
 "use client";
-import { Input } from "@/components/shared/input";
-import { Button } from "@/components/ui/button";
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  Form,
-  FormMessage,
-} from "@/components/ui/form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
+
 import React from "react";
-import { useForm } from "react-hook-form";
+import Link from "next/link";
 import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
+import { FormInput } from "@/components/shared/form-input";
 
 const formSchema = z.object({
-  email: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  password: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
+  email: z.string().email({ message: "Please enter a valid email address." }),
+  password: z
+    .string()
+    .min(2, { message: "Password must be at least 2 characters." }),
 });
 
+type FormValues = z.infer<typeof formSchema>;
+
 const SigninForm = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
@@ -32,47 +28,37 @@ const SigninForm = () => {
     },
   });
 
-  const onSubmit = () => {};
+  const onSubmit = (values: FormValues) => {
+    console.log(values);
+  };
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 p-4">
-        <FormField
+        <FormInput
           control={form.control}
           name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input placeholder="Email" {...field} />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input placeholder="Password" {...field} />
-              </FormControl>
-            </FormItem>
-          )}
+          placeholder="Email"
+          type="email"
         />
 
-        <p className="text-secondary-1 text-primary text-right my-6">
+        <FormInput
+          control={form.control}
+          name="password"
+          placeholder="Password"
+          type="password"
+        />
+
+        <p className="text-secondary-1 text-primary text-right my-6 cursor-pointer">
           Forgot password?
         </p>
-        <Button
-          size="lg"
-          type="submit"
-          onClick={form.handleSubmit(onSubmit)}
-          className="w-full rounded-2xl"
-        >
+
+        <Button size="lg" type="submit" className="w-full rounded-2xl">
           Login
         </Button>
+
         <p className="text-secondary-1 text-heading text-center mt-6">
-          {`Don't have a Blanja account? `}{" "}
+          Don&apos;t have a Blanja account?{" "}
           <Link href="/sign-up">
             <span className="text-primary">Register</span>
           </Link>
