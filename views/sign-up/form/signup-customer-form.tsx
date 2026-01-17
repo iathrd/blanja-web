@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { FormInput } from "@/components/shared/form-input";
 import { formCustommerSchema } from "./validation";
+import { Typography } from "@/components/shared/typography";
 
 type FormValues = z.infer<typeof formCustommerSchema>;
 
@@ -49,12 +50,14 @@ const SignupCustomerForm = () => {
           Register
         </Button>
 
-        <p className="text-secondary-1 text-heading text-center mt-6">
-          Already have a Tokopedia account?{" "}
+        <Typography as="p" variant="sm" className="mt-6 text-center">
+          Already have a blanja account?{" "}
           <Link href="/sign-in">
-            <span className="text-primary">Login</span>
+            <Typography as="span" variant="sm" className="text-primary">
+              Login
+            </Typography>
           </Link>
-        </p>
+        </Typography>
       </form>
     </Form>
   );

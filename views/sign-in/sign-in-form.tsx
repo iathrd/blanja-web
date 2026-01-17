@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { FormInput } from "@/components/shared/form-input";
+import { Typography } from "@/components/shared/typography";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address." }),
@@ -49,20 +50,26 @@ const SigninForm = () => {
           type="password"
         />
 
-        <p className="text-secondary-1 text-primary text-right my-6 cursor-pointer">
+        <Typography
+          as="p"
+          variant="sm"
+          className="mt-6 text-right cursor-pointer text-primary my-4"
+        >
           Forgot password?
-        </p>
+        </Typography>
 
         <Button size="lg" type="submit" className="w-full rounded-2xl">
           Login
         </Button>
 
-        <p className="text-secondary-1 text-heading text-center mt-6">
-          Don&apos;t have a Blanja account?{" "}
+        <Typography as="p" variant="sm" className="mt-6 text-center">
+          Don&apos;t have a blanja account?{" "}
           <Link href="/sign-up">
-            <span className="text-primary">Register</span>
+            <Typography as="span" variant="sm" className="text-primary">
+              Register
+            </Typography>
           </Link>
-        </p>
+        </Typography>
       </form>
     </Form>
   );
